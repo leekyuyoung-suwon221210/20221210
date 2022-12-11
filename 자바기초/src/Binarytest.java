@@ -8,7 +8,8 @@ public class Binarytest {
 		int oNum = 012;
 		int hNum = 0XA;	
 		
-		
+		//    정수 < 실수
+		//     short<int<long  <  float < double
 		System.out.println(num);
 		System.out.println(bNum);
 		System.out.println(oNum);
