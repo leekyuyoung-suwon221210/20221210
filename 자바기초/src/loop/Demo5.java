@@ -17,19 +17,24 @@ public class Demo5 {
 		// 사람이 맞추는 게임
 		// 내가 제시한 숫작 컴퓨터보다 크면 크다 출력
 		// 내가 제시한 숫작 컴퓨터보다 작으면 작다
-		boolean isMatch = false;
+		boolean isMatch = true;
 		int comnum = (int)(Math.random()*100)+1;
 		Scanner sc = new Scanner(System.in);
-		while (!isMatch) 
+		
+		System.out.println("숫자를 입력하세요");
+		int humanNum = sc.nextInt();
+		
+		while (humanNum != comnum) 
 		{
 			System.out.println("숫자를 입력하세요");
-			int humanNum = sc.nextInt();
+			humanNum = sc.nextInt();
+			
+			
 			if(humanNum > comnum)
 				System.out.println("입력한 값이 큽니다.");
 			else if(humanNum < comnum)
 				System.out.println("입력한 값이 작습니다.");
-			else {
-				isMatch = true;
+			else {				
 				System.out.println("정답입니다.");				
 			}
 		}
