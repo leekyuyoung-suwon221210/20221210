@@ -12,9 +12,7 @@ public class Sample {
 		// 10 °³
 		String apple = "Apple";
 		String banana = "Banana";
-		String orange = "Orange";		
-		
-		
+		String orange = "Orange";
 		
 		
 		String fruit[] = new String[3];		
