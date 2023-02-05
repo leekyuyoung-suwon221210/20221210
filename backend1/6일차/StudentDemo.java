@@ -3,24 +3,15 @@ package java_6day;
 public class StudentDemo {
 	
 	public static void main(String[] args) {
-		StudentMng sm = new StudentMng();
-
-		Student s = new Student();
-		s.inputData();
-		s.getMean();
-		s.calcGrade();
-		s.studentInfo();
+		StudentMng sm = new StudentMng();	
+		int maxClassNum = 3;
 		
-		sm.makeClass(s);
-		
-		Student s1 = new Student();
-		s1.inputData();
-		s1.getMean();
-		s1.calcGrade();
-		s1.studentInfo();
-		
-		sm.makeClass(s1);
-
+		for (int i = 0; i < maxClassNum; i++) {
+			Student s = new Student();			
+			s.inputData();			
+			sm.makeClass(s);
+		}		
+		sm.showClass();
 	}
 
 }

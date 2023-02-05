@@ -20,6 +20,9 @@ public class StudentMng {
 	void showClass() {
 		System.out.println("이름\t국어\t영어\t수학\t평균\t학점\n");
 		for (int i = 0; i < students.length; i++) {
+			if(i > currentPos-1) {
+				return;
+			}
 			students[i].studentInfo();
 		}
 	}

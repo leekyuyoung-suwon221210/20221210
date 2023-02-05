@@ -12,8 +12,8 @@ public class Student {
 	String name;
 	int[] scores = new int[3];
 //	int[] scores = {0,0,0};
-	String grad;
-	double avg;
+	private String grad;
+	private double avg;
 	double getMean() {
 		int total = 0;
 		for (int i = 0; i < scores.length; i++) {
@@ -43,6 +43,8 @@ public class Student {
 		scores[1] = sc.nextInt();
 		System.out.print("수학:");
 		scores[2] = sc.nextInt();
+		getMean();
+		calcGrade();
 	}
 	void studentInfo() {
 		System.out.printf("%s\t%d\t%d\t%d\t%.2f\t%s\n",
