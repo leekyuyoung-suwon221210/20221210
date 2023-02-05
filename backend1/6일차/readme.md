@@ -17,12 +17,18 @@
 set 계열의 캡슐화된 함수의 리턴 타입은 클래스 이고 this를 리턴하면 된다.
 
 작성
+
 public Staff setName(String name){
+
          this.name = name;
+         
          return this;
+         
 }
 
 
 사용
+
 Staff s = new Staff();
+
 s.setName("kim").setOOO().setOOO()
