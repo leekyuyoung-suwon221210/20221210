@@ -12,3 +12,17 @@
 생성자의 종류 : 
    - 기본생성자 : 생략되어 있다 - 만약 어떠한 종류의 생성자가 만들어지면 사라짐
    - 매개변수 생성자 : 매개변수를 가지는 생성자
+   
+메소드 체이닝( 연속 호출)
+set 계열의 캡슐화된 함수의 리턴 타입은 클래스 이고 this를 리턴하면 된다.
+
+작성
+public Staff setName(String name){
+         this.name = name;
+         return this;
+}
+
+
+사용
+Staff s = new Staff();
+s.setName("kim").setOOO().setOOO()
