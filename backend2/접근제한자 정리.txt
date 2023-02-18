@@ -1,0 +1,17 @@
+객체
+	패키지가 다르면 public만 허용
+	패키지가 같으면 private만 안됨
+
+상속
+	패키지가 다르면 public,protected만 허용
+	패키지가 같으면 private만 안됨
+
+실제개발할때는 public private protected만 사용하고.
+
+private은 캡슐화. 왠만한 변수는 -상황에따라서 gettere / setter 제공
+     왠만하면 초기화는  생성자를 통해서
+함수는 왠만하면 public 단.. 상속과 관련이 있는 함수 protected
+
+
+
+
