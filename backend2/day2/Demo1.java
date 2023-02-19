@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Demo1 {
+	private static Scanner sc = new Scanner(System.in);
 	private static int showMenu() {
 		System.out.println("다음 메뉴를 선택하세요");
 		System.out.println("1. 입장객 등록");
 		System.out.println("2. 수입");
 		System.out.println("3. 종료");
-		return (new Scanner(System.in)).nextInt();
+		return sc.nextInt();
 				
 	}	
 	private static  void showPerson() {
@@ -23,13 +24,31 @@ public class Demo1 {
 		int choice = 0;
 		while (choice!=4) {
 			showPerson();
-			choice =  (new Scanner(System.in)).nextInt();	
+			choice =  sc.nextInt();	
 			if(choice == 1) lists.add(new Adult());
 			else if(choice == 2) lists.add(new TeanAger());
 			else if(choice == 3) lists.add(new Child());
 		}
 	}
 	
+	private static String makeComma(long number) {
+		String num =  String.valueOf(number);
+		int count = 1;
+		String str = "";
+		for (int i = num.length()-1; i > -1; i--) {			
+			str += num.charAt(i);			
+			if(count % 3 == 0 && i != 0) {
+				str += ",";
+			}
+			count++;
+		}		
+		// 문자열 뒤집기
+		String str2 = "";
+		for (int i = str.length()-1; i > -1; i--) {
+			str2 += str.charAt(i);
+		}		
+		return str2;
+	}
 	public static void main(String[] args) {	
 		ArrayList<Person> lists = new ArrayList<Person>();		
 		
@@ -50,7 +69,8 @@ public class Demo1 {
 		}
 		
 		System.out.println("입장인원\t어른\t청소년\t어린이\t총 수입");
-		System.out.printf("%d\t%d\t%d\t%d\t%d\n",0,0,0,0,totalPrice);
+		System.out.printf("%d\t%d\t%d\t%d\t%s\n",Person.getCount(),
+				Adult.getCount(),TeanAger.getCount(),Child.getCount(),makeComma(totalPrice));
 	}
 
 }
