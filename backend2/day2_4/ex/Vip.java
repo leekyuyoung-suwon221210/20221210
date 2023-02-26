@@ -6,4 +6,9 @@ public class Vip implements Grade{
 		return price*VIP_RATE;
 	}
 
+	@Override
+	public String toString() {
+		return "Vip";
+	}
+
 }

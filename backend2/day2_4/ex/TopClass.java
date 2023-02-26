@@ -8,4 +8,9 @@ public class TopClass implements Grade{
 		return price*TOPCLASS_RATE;
 	}
 
+	@Override
+	public String toString() {
+		return "TopClass";
+	}
+
 }

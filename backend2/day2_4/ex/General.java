@@ -8,4 +8,10 @@ public class General implements Grade{
 		return price*GENERAL_RATE;
 	}
 
+	@Override
+	public String toString() {
+		return "General";
+	}
+	
+
 }

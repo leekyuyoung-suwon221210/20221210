@@ -16,8 +16,10 @@ public class Customer {
 	public double getRewardPrice() {
 		return rewardPrice;
 	}
-	 
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Customer [grad=" + grad + ", totalPrice=" + totalPrice + ", name=" + name + ", rewardPrice="
+				+ rewardPrice + "]";
+	}
 }
