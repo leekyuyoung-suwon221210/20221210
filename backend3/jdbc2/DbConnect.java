@@ -34,7 +34,7 @@ public class DbConnect implements AutoCloseable{
 	
 	@Override
 	public void close() throws Exception {
-		System.out.println("자동 close 호출");
+		System.out.println("auto close called");
 		conn.close();
 		
 	}
