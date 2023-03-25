@@ -1,0 +1,41 @@
+<body>
+    <div>
+        <span id="order">1</span>번째 참가자
+    </div>
+    <div>
+        제시어:<span id="word"></span>
+    </div>
+    <input type="text">
+    <button >입력</button>    
+</body>
+<script>
+    const number = Number(prompt("참가자수를 입력하세요"));
+    const $button =  document.querySelector('button');
+    const $input =  document.querySelector('input');
+    const $word = document.querySelector('#word');
+    let word;   // 제시어
+    let newWord; // 현재 단어
+
+    const onClickButton = ()=>{
+        if (!word){
+            word = newWord; // 입력한 단어가 제시어
+            $word.textContent = word; // 화면에 단어 표시 
+
+        }else{
+            // 비어 있지 않다
+            if(word[word.length-1] === newWord[0]){
+                word = newWord;
+                $word.textContent = word;
+            }else{ // 틀렸을때
+                alert('올바르지 않은 단어입니다.');
+            }
+        }
+    };
+    const onInput = (event)=>{
+        newWord =  event.target.value;
+    };
+
+    $button.addEventListener('click', onClickButton);
+    $input.addEventListener('input', onInput);
+
+</script>

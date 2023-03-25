@@ -1,0 +1,38 @@
+<body>
+    <div>
+        <span id="order">1</span>번째 참가자
+    </div>
+    <div>
+        제시어:<span id="order">고구마</span>
+    </div>
+    <input type="text">
+    <button >입력</button>
+    <button class="hello">버튼2</button>
+    <button class="hello">버튼3</button>
+</body>
+
+
+<script>
+    // const onClickButton = ()=>console.log('버튼 클릭');
+    // const number = prompt('몇 명이 참가합니까');
+    // console.log('number : ',number);
+    // console.log('type : ', typeof(number));
+    // const realNumber = Number(number);
+    // const $$span = document.querySelectorAll('#order');
+    // console.log($$span);
+    const $input = document.querySelector('input');
+    // console.log($input);
+    const $button = document.querySelector('button');
+    // console.log($button);    
+    $button.addEventListener('click', 
+        ()=>console.log('버튼 클릭')
+    );
+
+    $input.addEventListener('input', 
+        (event)=> console.log('글자입력',event.target.value  )
+    );
+</script>
+
+
+
+
