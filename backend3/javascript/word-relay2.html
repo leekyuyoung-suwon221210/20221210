@@ -13,10 +13,12 @@
     const $button =  document.querySelector('button');
     const $input =  document.querySelector('input');
     const $word = document.querySelector('#word');
+    const $order = document.querySelector('#order')
     let word;   // 제시어
     let newWord; // 현재 단어
 
     const onClickButton = ()=>{
+        $order.textContent = Number($order.textContent) + 1;
         if (!word){
             word = newWord; // 입력한 단어가 제시어
             $word.textContent = word; // 화면에 단어 표시 
