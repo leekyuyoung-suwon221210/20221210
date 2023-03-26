@@ -14,17 +14,42 @@
     const $input =  document.querySelector('input');
     const $word = document.querySelector('#word');
     const $order = document.querySelector('#order')
+    const wordlist = []
     let word;   // 제시어
     let newWord; // 현재 단어
 
-    const onClickButton = ()=>{
+    const onClickButton = ()=>{     
+        $input.value = '';   
+        if (number ===  Number($order.textContent)){
+            $order.textContent = 0;
+        }
+
         $order.textContent = Number($order.textContent) + 1;
         if (!word){
             word = newWord; // 입력한 단어가 제시어
             $word.textContent = word; // 화면에 단어 표시 
+            wordlist.push(newWord);
 
         }else{
-            // 비어 있지 않다
+            // 비어 있지 않다            
+            if (wordlist.includes(newWord)){
+                alert('사용한 단어입니다.'); 
+                return;
+            }
+            else{
+                wordlist.push(newWord);
+            }
+            
+            // wordlist.forEach( x=>{
+            //     if(x === newWord){
+            //         alert('사용한 단어입니다.');    
+            //         $order.textContent = 1;
+            //         return;  // continue
+            //     }
+            // })
+
+            // wordlist.push(newWord);
+
             if(word[word.length-1] === newWord[0]){
                 word = newWord;
                 $word.textContent = word;

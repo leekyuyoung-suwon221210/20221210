@@ -1,0 +1,140 @@
+<style>
+    button{
+        width: 40px;
+        height: 40px;
+        margin : 5px;
+    }
+    #result{
+        width: 210px;
+        height: 40px;
+        margin-bottom : 5px;
+        margin-left : 5px;
+        text-align: right;
+    }
+    #calc{
+        width: 210px;
+        height: 20px;
+        margin : 5px;
+        text-align: right;
+    }
+
+</style>
+
+<body style="margin:auto">
+    <div>
+        <input disabled id = "calc"/>
+    </div>
+    <div>
+        <input readonly id = "result"/>
+    </div>
+    
+    <div>
+        <button id="btn_7",value = 7>7</button>
+        <button id="btn_8",value = 8>8</button>
+        <button id="btn_9",value = 9>9</button>
+        <button id="btn_plus">+</button>
+    </div>
+    <div>
+        <button id="btn_4",value = 4>4</button>
+        <button id="btn_5",value = 5>5</button>
+        <button id="btn_6",value = 6>6</button>
+        <button id="btn_minus">-</button>
+    </div>
+    <div>
+        <button id="btn_1",value = "1">1</button>
+        <button id="btn_2",value = 2>2</button>
+        <button id="btn_3",value = 3>3</button>
+        <button id="btn_div">/</button>
+    </div>
+    <div>
+        <button id="btn_C">C</button>
+        <button id="btn_0">0</button>
+        <button id="btn_equal">=</button>
+        <button id="btn_multi">*</button>
+    </div>
+    
+</body>
+<script>
+    
+    const onclickNumber = (event)=>{
+        if(!CalcSimbol){
+            stack1 += event.target.textContent;
+            $text.value = stack1;
+        }else{
+            stack2 += event.target.textContent;
+            $text.value = stack2;
+        }
+        $calc.value = stack1+" "+CalcSimbol+" "+stack2;
+    }
+    const onClickSimbol = (event)=>{
+        if(!CalcSimbol){
+            CalcSimbol = event.target.textContent
+        }else{
+            onClickEqual();
+        }
+        $calc.value = stack1+" "+CalcSimbol+" "+stack2;
+    }
+    const onClickEqual = ()=>{
+       
+            switch (CalcSimbol) {
+            case "+":
+                $text.value = (stack1-0)+(stack2-0);
+                break;
+            case "-":
+                $text.value = (stack1-0)-(stack2-0);
+                break;
+            case "*":
+                $text.value = (stack1-0)*(stack2-0);
+                break;
+            case "/":
+                $text.value = (stack1-0)/(stack2-0);
+                break;
+            default:
+                break;
+            }
+            $calc.value = stack1+" "+CalcSimbol+" "+stack2+" = "+$text.value;
+            stack1 = $text.value;
+            stack2= "";
+        
+    }
+    const resetAll = ()=>{
+        tmp = stack2 = stack1 = value = CalcSimbol = calclist = "";
+        $text.value="";
+    }
+</script>
+<script>
+    let stack1="";
+    let stack2="";
+    let CalcSimbol = "";
+    let calclist = "";
+    let tmp="";
+    const $calc = document.querySelector("#calc");
+    const $text = document.querySelector("#result");
+    
+    document.querySelector("#btn_0").addEventListener("click",onclickNumber);
+    document.querySelector("#btn_1").addEventListener("click",onclickNumber);
+    document.querySelector("#btn_2").addEventListener("click",onclickNumber);
+    document.querySelector("#btn_3").addEventListener("click",onclickNumber);
+    document.querySelector("#btn_4").addEventListener("click",onclickNumber);
+    document.querySelector("#btn_5").addEventListener("click",onclickNumber);
+    document.querySelector("#btn_6").addEventListener("click",onclickNumber);
+    document.querySelector("#btn_7").addEventListener("click",onclickNumber);
+    document.querySelector("#btn_8").addEventListener("click",onclickNumber);
+    document.querySelector("#btn_9").addEventListener("click",onclickNumber);
+    
+    document.querySelector("#btn_plus").addEventListener("click",onClickSimbol);
+    document.querySelector("#btn_minus").addEventListener("click",onClickSimbol);
+    document.querySelector("#btn_multi").addEventListener("click",onClickSimbol);
+    document.querySelector("#btn_div").addEventListener("click",onClickSimbol);
+
+    document.querySelector("#btn_equal").addEventListener("click",onClickEqual);
+
+    document.querySelector("#btn_C").addEventListener("click",resetAll);
+</script>
+
+
+<!-- <script>
+    const func = (msg) =>()=>{return () =>{console.log(msg);}}
+    const v1 = func('aaaa');
+    v1();
+</script> -->

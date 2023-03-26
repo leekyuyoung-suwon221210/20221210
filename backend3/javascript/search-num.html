@@ -1,0 +1,25 @@
+<!-- 1~100사이의 숫자중에서  랜덤하게 컴퓨터가 하나 선택하면
+사람이 숫자를 예측해서
+사람기준으로 사람 > 컴퓨터  -> 크다 -->
+
+<body>
+    <label>예측값</label> <input  style="margin: 5px;">
+    <button >확인</button>
+    <br><span></span>
+</body>
+
+<!-- 태그객체 생성 -->
+<script>
+    const com_number = $span.textContent = parseInt( Math.random()*100+1);
+    const $label = document.querySelector('label');
+    const $input = document.querySelector('input');
+    const $button = document.querySelector('button');
+    const $span = document.querySelector('span');
+</script>
+
+<!-- 이벤트 등록 -->
+<script>
+    $button.addEventListener('click', ()=>{
+        
+    } );
+</script>

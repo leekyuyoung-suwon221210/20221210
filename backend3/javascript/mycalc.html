@@ -1,0 +1,133 @@
+<style>
+    #operator{
+        width:50px;
+        height: 50px;
+        margin: 5px;
+        text-align: center;
+    }
+
+    #result{
+        width:180px;
+        height: 50px;
+        margin: 5px;
+        text-align: center;
+    }
+
+    button {
+        width:50px;
+        height: 50px;
+        margin: 5px;
+    }
+</style>
+
+<body>
+    <input readonly id = 'operator'>
+    <input readonly id = 'result'>
+    <br>
+    <button id="num-7">7</button>
+    <button id="num-8">8</button>
+    <button id="num-9">9</button>
+    <button id="plus">+</button>
+    <br>
+    <button id="num-4">4</button>
+    <button id="num-5">5</button>
+    <button id="num-6">6</button>
+    <button id="minus">-</button>
+    <br>
+    <button id="num-1">1</button>
+    <button id="num-2">2</button>
+    <button id="num-3">3</button>
+    <button id="divide">/</button>
+    <br>
+    <button id="clear">C</button>
+    <button id="num-0">0</button>
+    <button id="calculate">=</button>
+    <button id="multiply">x</button>
+</body>
+<script>
+    const onclickNumber = (event)=>{
+        if(operator){
+            numTwo += event.target.textContent;
+            $result.value = numTwo;
+        }
+        else{
+            numOne  += event.target.textContent;
+            $result.value = numOne;
+        }
+
+    }
+    const onClickOperator = (event)=>{
+        if(numTwo){
+            $result.value = Number(numOne) + Number(numTwo);
+            numOne = Number(numOne) + Number(numTwo);
+            numTwo = '';            
+        }
+        operator = event.target.textContent;
+        $operator.value = event.target.textContent;
+    }
+</script>
+
+<script>
+    let numOne = '';
+    let numTwo = '';
+    let operator = '';
+    const $operator = document.querySelector('#operator');
+    const $result = document.querySelector('#result')
+    document.querySelector("#num-0").addEventListener('click',onclickNumber);
+    document.querySelector("#num-1").addEventListener('click',onclickNumber);
+    document.querySelector("#num-2").addEventListener('click',onclickNumber);
+    document.querySelector("#num-3").addEventListener('click',onclickNumber);
+    document.querySelector("#num-4").addEventListener('click',onclickNumber);
+    document.querySelector("#num-5").addEventListener('click',onclickNumber);
+    document.querySelector("#num-6").addEventListener('click',onclickNumber);
+    document.querySelector("#num-7").addEventListener('click',onclickNumber);
+    document.querySelector("#num-8").addEventListener('click',onclickNumber);
+    document.querySelector("#num-9").addEventListener('click',onclickNumber);
+    document.querySelector("#plus").addEventListener('click',onClickOperator);
+    document.querySelector("#minus").addEventListener('click',onClickOperator);
+    document.querySelector("#multiply").addEventListener('click',onClickOperator);
+    document.querySelector("#divide").addEventListener('click',onClickOperator);
+    document.querySelector("#clear").addEventListener('click',()=>{
+        $operator.value = '';
+        $result.value = '';
+        numOne = numTwo = operator = ''
+    });
+    document.querySelector("#calculate").addEventListener('click',()=>{
+        operator = $operator.value;        
+        switch (operator) {
+            case '+':
+                $result.value = Number(numOne) + Number(numTwo);
+                break;
+            case '-':
+                $result.value = Number(numOne) - Number(numTwo);
+                break;
+            case '/':
+                $result.value = Number(numOne) / Number(numTwo);
+                break;
+            case '*':
+                $result.value = Number(numOne) * Number(numTwo);
+                break;
+            default:
+                break;
+        }
+    });
+</script>
+
+
+
+<!-- <script>
+    // const func = (msg)=>{
+    //     return ()=>{
+    //         console.log(msg);
+    //     }
+    // }
+    
+    const func =  (msg) =>()=>{
+        console.log(msg);
+    }
+    const v1 = func('hello');
+    const v2 = func('javascript');
+    v1()
+    v2()
+    
+</script> -->

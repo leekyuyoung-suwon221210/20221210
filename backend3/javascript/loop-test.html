@@ -1,0 +1,46 @@
+<button id="btn1">누르세요1</button>
+<button id="btn2">누르세요2</button>
+<button id="btn3">누르세요3</button>
+<script>
+    const numbers = [10,15,20,25,30,35];
+    const testf1 = ()=>{        
+        // for (let index = 0; index < numbers.length; index++) {        
+        //     if (numbers[index] === 20){
+        //         return;
+        //     }
+        //     console.log( numbers[index]);
+        // }
+        
+        numbers.forEach( x =>{
+            if (x === 20){
+                return true;
+            }
+            console.log( x);
+        });
+    }
+
+    const testf2 = ()=>{
+        numbers.some(x =>{
+            if(x == 20){
+                return true;   //  true면 탈출  / false면 continue
+            }
+            console.log( x);
+        })
+    }
+
+    const testf3 = ()=>{
+        // 조건을 모두 만족하면 true 그렇지 않으면 false
+        // 특징  해당조건을 만족하지 않는 값이 나타나면 순환을 멈춘다
+        const result = numbers.every(x=>x < 0);
+        console.log(result);
+    }
+
+    const $button1 = document.querySelector('#btn1');
+    $button1.addEventListener('click', testf1);
+
+    const $button2 = document.querySelector('#btn2');
+    $button2.addEventListener('click', testf2);
+
+    const $button3 = document.querySelector('#btn3');
+    $button3.addEventListener('click', testf3);
+</script>
