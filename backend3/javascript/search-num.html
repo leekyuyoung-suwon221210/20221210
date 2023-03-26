@@ -3,14 +3,15 @@
 사람기준으로 사람 > 컴퓨터  -> 크다 -->
 
 <body>
-    <label>예측값</label> <input  style="margin: 5px;">
+    <label style="margin: 20px; font-size: 25px;">1~100 사이의 값을 예측하세요</label><br>
+    <label>예측값</label> <input  style="margin: 20px;">
     <button >확인</button>
     <br><span></span>
 </body>
 
 <!-- 태그객체 생성 -->
 <script>
-    const com_number = $span.textContent = parseInt( Math.random()*100+1);
+    const com_number = parseInt( Math.random()*100+1);
     const $label = document.querySelector('label');
     const $input = document.querySelector('input');
     const $button = document.querySelector('button');
@@ -20,6 +21,12 @@
 <!-- 이벤트 등록 -->
 <script>
     $button.addEventListener('click', ()=>{
-        
+        let human = parseInt($input.value);
+        if(human === com_number)
+            $span.textContent = '정답';
+        else if(human > com_number)
+            $span.textContent = '크다';
+        else
+            $span.textContent = '작다';        
     } );
 </script>
