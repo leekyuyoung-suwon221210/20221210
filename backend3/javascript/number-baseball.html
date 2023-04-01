@@ -19,7 +19,7 @@
         numbers.splice(index,1)
     }
     console.log(answer)
-    const tries = [];
+    let tries = [];
     $form.addEventListener('submit',(event)=>{
         event.preventDefault() // 폼의 기보동작(새로고침)을 취소 
         const value = $input.value;  //주의 문자열로 들어옮
@@ -36,14 +36,15 @@
         {
             let strike = 0;
             let ball = 0;
-            for (let i = 0; i < answer.length; i++) {
-                if( i === value.indexOf(answer[i])){
+            answer.forEach( (element, idx) => {
+                if( idx === value.indexOf(element)){
                     strike++;
                 }
-                else if(value.indexOf(answer[i]) !== -1){
+                else if(value.indexOf(element) !== -1){
                     ball++;
-                }                
-            }
+                }  
+            });
+            
             $logs.textContent = '스트라이크 : '+strike + ' 볼 : '+ ball; 
         }
 
