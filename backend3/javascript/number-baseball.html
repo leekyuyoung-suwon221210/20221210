@@ -1,0 +1,52 @@
+<form id = 'form'>
+    <input type="number" id="input">
+    <!-- <input type="button" value="확인"> -->    
+    <button >확인</button>   
+</form>
+<div id="logs"></div>
+
+<script>
+    const $input = document.querySelector('#input')
+    const $form = document.querySelector('#form')
+    const numbers = [];
+    for (let index = 1; index < 11; index++) {
+        numbers.push(index)       
+    }
+    const answer = []
+    for (let i = 0; i < 3; i++) {
+        const index = Math.floor(Math.random()*numbers.length)//길이에 따라
+        answer.push(numbers[index])  
+        numbers.splice(index,1)
+    }
+    console.log(answer)
+    const tries = [];
+    $form.addEventListener('submit',(event)=>{
+        event.preventDefault() // 폼의 기보동작(새로고침)을 취소 
+        const value = $input.value;  //주의 문자열로 들어옮
+        $input.value = '';
+        const valid = checkInput(value); // 길이가 4글자, 중복, 이미시도한 값인지
+        tries.push(valid);
+        if(!valid) return;
+        if(answer.join("") === value){
+            $logs.textContext = '홈런!'; 
+            return;       
+        }
+        if(tries.length>=9){
+            const message = document.createTextNode('패배!정답은${answer.join("")}');
+            $logs.appendChild(message);
+            return;
+        }
+    })
+    const checkInput = (input) =>{
+        if(input.length !== 4){
+            return alert('4자리  숫자를 입력하세요');
+        }
+        if(new Set(input).size !==4){ // new Set('1123')
+            return alert('중복되지 않게 입력해 주세요');
+        }
+        if(tries.includes(input)){
+            return alert('이미 시도한 값입니다.');
+        }
+        return true
+    }
+</script>
