@@ -28,11 +28,28 @@
         tries.push(value);
         if(!valid) return;
         if(answer.join("") === value){
-            $logs.textContext = '홈런!'; 
+            $logs.textContent = '홈런!'; 
+            tries = []
             return;       
         }
+        else
+        {
+            let strike = 0;
+            let ball = 0;
+            for (let i = 0; i < answer.length; i++) {
+                if( i === value.indexOf(answer[i])){
+                    strike++;
+                }
+                else if(value.indexOf(answer[i]) !== -1){
+                    ball++;
+                }                
+            }
+            $logs.textContent = '스트라이크 : '+strike + ' 볼 : '+ ball; 
+        }
+
         if(tries.length>=9){
-            const message = document.createTextNode('패배!정답은${answer.join("")}');
+            const message = document.createTextNode(`패배!정답은 :${answer.join("")}`);
+            $logs.append(document.createElement('br'))
             $logs.appendChild(message);
             return;
         }
