@@ -1,3 +1,29 @@
-<button>가위</button>
-<button>바위</button>
-<button>보</button>
+<style>
+    #computer{
+        width:170px;
+        height: 200px;
+    }
+</style>
+<div id="computer"></div>
+<div>
+    <button>가위</button>
+    <button>바위</button>
+    <button>보</button>
+</div>
+<script>
+    const $computer = document.querySelector('#computer');
+    const IMG_URL = './rsp.png';
+    const temps = ['0','380px','170px'];
+    let countnum = 0    
+    setInterval(() => {
+        countnum++;
+        $computer.style.background = `url(${IMG_URL}) ${temps[countnum % 3]} 0`; 
+        console.log($computer.style.background);
+        $computer.style.backgroundSize = 'auto 200px'
+    }, 100);
+
+    // $computer.style.background = `url(${IMG_URL}) 0 0`; //가위
+    // $computer.style.background = `url(${IMG_URL}) 170px 0`; // 보
+    // $computer.style.background = `url(${IMG_URL}) 380px 0`; // 바위
+    // $computer.style.backgroundSize = 'auto 200px'
+</script>
