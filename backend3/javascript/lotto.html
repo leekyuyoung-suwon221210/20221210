@@ -1,0 +1,61 @@
+<style>
+    .ball{
+        display: inline-block;
+        border: 1px solid black;
+        border-radius: 20px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+        text-align: center;
+        margin: 10px;        
+    }
+</style>
+
+
+<body>
+    <div id="result">추첨 결과는?</div><br>
+    <div id="bonus">보너스:</div>    
+    
+</body>
+<script>
+    $result = document.querySelector('#result');
+    $bonus = document.querySelector('#bonus');
+    // 연속 배열 생성
+    const candidate = [];
+    for (let i = 1; i <= 45; i++) {
+        candidate.push(i);
+    }    
+    // 생성된 배열을 섞기
+    for (let idx = 0; idx < 100; idx++) {        
+        const i = Math.floor(Math.random() * candidate.length);
+        const j = Math.floor(Math.random() * candidate.length);
+        [candidate[i], candidate[j]] = [candidate[j], candidate[i]];
+    }
+    lottoNums = candidate.slice(0,7); //.sort((a,b)=>a-b);  // 오름차순  보너스포함
+    // 타이머 일정 이후로 정해진 함수또는 로직을 수행 - 한번
+    // setTimeout(() => {
+    //     alert('3초가 지났습니다.')
+    // }, 1000*3);
+    // alert('3초후에 이 메시지가 보일까요?')
+    
+    // var는 함수범위
+    // let 블럭범위
+
+    for (let index = 0; index < 6; index++) {                
+        setTimeout(() => { 
+            console.log('setTimeout : ' + index);           
+            const $ball = document.createElement('div');
+            $ball.className = 'ball';
+            $ball.textContent = lottoNums[index];
+            $result.appendChild($ball);
+        }, 1000*3*(index+1));                
+    }  
+    setTimeout(() => {            
+            const $ball = document.createElement('div');
+            $ball.className = 'ball';
+            $ball.textContent = lottoNums[lottoNums.length-1];
+            $bonus.appendChild($ball);
+        }, 1000*3*(lottoNums.length));
+
+</script>
