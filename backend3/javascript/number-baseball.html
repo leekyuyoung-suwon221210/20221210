@@ -1,6 +1,5 @@
 <form id = 'form'>
     <input type="number" id="input">
-    <!-- <input type="button" value="확인"> -->    
     <button >확인</button>   
 </form>
 <div id="logs"></div>
@@ -8,8 +7,9 @@
 <script>
     const $input = document.querySelector('#input')
     const $form = document.querySelector('#form')
+    const $logs = document.querySelector('#logs')
     const numbers = [];
-    for (let index = 1; index < 11; index++) {
+    for (let index = 1; index < 10; index++) {  // 1 ~ 9
         numbers.push(index)       
     }
     const answer = []
@@ -25,7 +25,7 @@
         const value = $input.value;  //주의 문자열로 들어옮
         $input.value = '';
         const valid = checkInput(value); // 길이가 4글자, 중복, 이미시도한 값인지
-        tries.push(valid);
+        tries.push(value);
         if(!valid) return;
         if(answer.join("") === value){
             $logs.textContext = '홈런!'; 
@@ -38,10 +38,10 @@
         }
     })
     const checkInput = (input) =>{
-        if(input.length !== 4){
-            return alert('4자리  숫자를 입력하세요');
+        if(input.length !== 3){
+            return alert('3자리  숫자를 입력하세요');
         }
-        if(new Set(input).size !==4){ // new Set('1123')
+        if(new Set(input).size !==3){ // new Set('123')
             return alert('중복되지 않게 입력해 주세요');
         }
         if(tries.includes(input)){
