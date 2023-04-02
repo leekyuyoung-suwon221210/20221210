@@ -24,10 +24,47 @@
         <td id="t21"></td>
         <td id="t22"></td>
     </table>
+    <div id="result"></div>
 </body>
 <script>
+    const $result = document.querySelector('result');
+
     let mark = 'X';
-    
+    const checkWinner = (m)=>{
+        if (m[0][0] === m[0][1] 
+            && m[0][0] === m[0][2]){
+                $result.textContent = m[0][0];
+        }
+        else if(m[1][0] === m[1][1] 
+            && m[1][0] === m[1][2]){
+                $result.textContent = m[0][0];
+        }
+        else if(m[2][0] === m[2][1] 
+        && m[2][0] === m[2][2]){
+            $result.textContent = m[0][0];
+        }
+        else if(m[0][0] === m[1][0] 
+        && m[0][0] === m[2][0]){
+            $result.textContent = m[0][0];
+        }
+        else if(m[0][1] === m[1][1] 
+        && m[0][1] === m[2][1]){
+            $result.textContent = m[0][0];
+        }
+        else if(m[0][2] === m[1][2] 
+        && m[0][2] === m[2][2]){
+            $result.textContent = m[0][0];
+        }
+        else if(m[0][0] === m[1][1]  // 대각선
+        && m[0][0] === m[2][2]){
+            $result.textContent = m[0][0];
+        }
+        else if(m[0][2] === m[1][1]  // 대각선
+        && m[0][2] === m[2][0]){
+            $result.textContent = m[0][0];
+        }
+    };
+
     const $table = document.querySelectorAll('td');
     const matirics = [[null,null,null],[null,null,null],[null,null,null]];
     const callback = (event)=>{
@@ -36,8 +73,9 @@
         }else{
             mark =  mark === 'X'? 'O' : 'X';
             event.target.textContent = mark;            
-            let a = parseInt(event.target.id.substr(2,1))
+            let a = parseInt(event.target.id.substr(1,1))
             let b = parseInt(event.target.id.substr(2,1))
+            console.log(a,b);
             matirics[a][b] = mark;
         }
         
