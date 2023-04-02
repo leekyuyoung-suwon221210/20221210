@@ -30,46 +30,35 @@
     const $result = document.querySelector('#result');
 
     let mark = 'X';
-    
-    // for (let row = 0; row < 3; row++) {
-    //     for (let col = 0; col < array.length; col++) {
-    //         m[row][col];
-    //     }
-    // }
 
     const checkWinner = (m,a,b)=>{
 
-        if (m[0][0] !== null && m[0][0] === m[0][1] 
-            && m[0][0] === m[0][2]){
-                $result.textContent = m[0][0];
+        for (let index = 0; index < 3; index++) {
+            if (m[index][0] !== null && m[index][0] === m[index][1] 
+            && m[index][0] === m[index][2]){
+                $result.textContent = m[index][0];
+                return  true;
+            }
         }
-        else if(m[1][0] !== null && m[1][0] === m[1][1] 
-            && m[1][0] === m[1][2]){
-                $result.textContent = m[1][0];
-        }
-        else if(m[2][0] !== null && m[2][0] === m[2][1] 
-        && m[2][0] === m[2][2]){
-            $result.textContent = m[2][0];
-        }
-        else if(m[0][0] !== null && m[0][0] === m[1][0] 
-        && m[0][0] === m[2][0]){
-            $result.textContent = m[0][0];
-        }
-        else if(m[0][1] !== null && m[0][1] === m[1][1] 
-        && m[0][1] === m[2][1]){
-            $result.textContent = m[0][1];
-        }
-        else if(m[0][2] !== null && m[0][2] === m[1][2] 
-        && m[0][2] === m[2][2]){
-            $result.textContent = m[0][2];
-        }
-        else if(m[0][0] !== null && m[0][0] === m[1][1]  // 대각선
+
+        for (let index = 0; index < 3; index++) {
+            if (m[0][index] !== null && m[0][index] === m[1][index] 
+                && m[0][index] === m[2][index]){
+            $result.textContent = m[0][index];
+            return true;
+                }
+        }       
+            
+        if(m[0][0] !== null && m[0][0] === m[1][1]  // 대각선
         && m[0][0] === m[2][2]){
             $result.textContent = m[0][0];
-        }
-        else if(m[0][2] !== null && m[0][2] === m[1][1]  // 대각선
+            return true;
+        }     
+
+        if(m[0][2] !== null && m[0][2] === m[1][1]  // 대각선
         && m[0][2] === m[2][0]){
             $result.textContent = m[0][2];
+            return true;
         }
     };
 
