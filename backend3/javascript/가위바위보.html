@@ -1,3 +1,11 @@
+<!-- 가위 1  
+바위 2
+보   3 -->
+
+<!-- 두 수를 빼고 1을 더한값 === 1 비기는거고
+(두 수를 빼고 1을 더한값에) % 3 == 0  게이머가 지는거고
+그외 는 게이머가 이긴다. -->
+
 <style>
     #computer{
         width:170px;
@@ -10,40 +18,57 @@
     <button id="stone">바위</button>
     <button id="paper">보</button>
 </div>
+<div id = 'result'></div>
 <script>
+    const $result = document.querySelector('#result');
     const $sci = document.querySelector('#sci');
     const $stone = document.querySelector('#stone');
     const $paper = document.querySelector('#paper');
-    let countnum = 0;
-    let intervalId;    
-    let randomGame = function(){
+    const $computer = document.querySelector('#computer');
+    const IMG_URL = './rsp.png';
+    const temps = ['0','380px','170px'];
+    const randomGame = function(){
         countnum++;
         $computer.style.background = `url(${IMG_URL}) ${temps[countnum % 3]} 0`;         
         $computer.style.backgroundSize = 'auto 200px'
     };
+    let countnum = 0;
+    let intervalId;        
+    let compNumber = Math.floor( (Math.random()*3))+1;
+    let humanNumber = -1;
+    console.log(compNumber);
 
-    $sci.addEventListener('click',()=>{
-        clearInterval(intervalId);
-    });
-    $stone.addEventListener('click',()=>{
-        intervalId =  setInterval(() => {
-            randomGame();
-        }, 100);
-    });
-    $paper.addEventListener('click',()=>{
-        intervalId =  setInterval(() => {
-            randomGame();
-        }, 100);
-    });
-
-
-    const $computer = document.querySelector('#computer');
-    const IMG_URL = './rsp.png';
-    const temps = ['0','380px','170px'];
-    
     intervalId =  setInterval(() => {
         randomGame();
     }, 100);
+
+    $sci.addEventListener('click',()=>{
+        humanNumber = 1;
+        // clearInterval(intervalId);        
+    });
+    $stone.addEventListener('click',()=>{
+        humanNumber = 2;
+        // intervalId =  setInterval(() => {
+        //     randomGame();
+        // }, 100);
+    });
+    $paper.addEventListener('click',()=>{
+        humanNumber = 3;
+    }); 
+    
+    const gameResult = ()=>{
+        var result = humanNumber - compNumber + 1;
+        if (result === 1){
+            $result.textContent = '비겼습니다.'
+        }
+        else if(result % 3 === 0){
+            $result.textContent = '컴퓨터가 승리했습니다.'
+        }
+        else{
+            $result.textContent = '이겼습니다.'
+        }
+    };
+    
 
     // $computer.style.background = `url(${IMG_URL}) 0 0`; //가위
     // $computer.style.background = `url(${IMG_URL}) 170px 0`; // 보
