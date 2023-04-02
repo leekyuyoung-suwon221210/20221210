@@ -27,17 +27,22 @@
 </body>
 <script>
     let mark = 'X';
+    
     const $table = document.querySelectorAll('td');
+    const matirics = [[null,null,null],[null,null,null],[null,null,null]];
     const callback = (event)=>{
         if (event.target.textContent !== ''){
             alert("빈칸이 아닙니다.");
         }else{
             mark =  mark === 'X'? 'O' : 'X';
-            event.target.textContent = mark;
+            event.target.textContent = mark;            
+            let a = parseInt(event.target.id.substr(2,1))
+            let b = parseInt(event.target.id.substr(2,1))
+            matirics[a][b] = mark;
         }
         
     };
-    $table.forEach(td=>{
-        td.addEventListener('click',callback);
+    $table.forEach((td,idx)=>{
+        td.addEventListener('click',callback);        
     });
 </script>
