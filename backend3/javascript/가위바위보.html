@@ -6,20 +6,43 @@
 </style>
 <div id="computer"></div>
 <div>
-    <button>가위</button>
-    <button>바위</button>
-    <button>보</button>
+    <button id="sci">가위</button>
+    <button id="stone">바위</button>
+    <button id="paper">보</button>
 </div>
 <script>
+    const $sci = document.querySelector('#sci');
+    const $stone = document.querySelector('#stone');
+    const $paper = document.querySelector('#paper');
+    let countnum = 0;
+    let intervalId;    
+    let randomGame = function(){
+        countnum++;
+        $computer.style.background = `url(${IMG_URL}) ${temps[countnum % 3]} 0`;         
+        $computer.style.backgroundSize = 'auto 200px'
+    };
+
+    $sci.addEventListener('click',()=>{
+        clearInterval(intervalId);
+    });
+    $stone.addEventListener('click',()=>{
+        intervalId =  setInterval(() => {
+            randomGame();
+        }, 100);
+    });
+    $paper.addEventListener('click',()=>{
+        intervalId =  setInterval(() => {
+            randomGame();
+        }, 100);
+    });
+
+
     const $computer = document.querySelector('#computer');
     const IMG_URL = './rsp.png';
     const temps = ['0','380px','170px'];
-    let countnum = 0    
-    setInterval(() => {
-        countnum++;
-        $computer.style.background = `url(${IMG_URL}) ${temps[countnum % 3]} 0`; 
-        console.log($computer.style.background);
-        $computer.style.backgroundSize = 'auto 200px'
+    
+    intervalId =  setInterval(() => {
+        randomGame();
     }, 100);
 
     // $computer.style.background = `url(${IMG_URL}) 0 0`; //가위
