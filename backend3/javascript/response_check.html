@@ -1,0 +1,57 @@
+<style>
+    #screen {
+        width: 300px;
+        height: 200px;
+        text-align: center;
+        user-select: none;
+    }
+    #screen.waiting {
+        background-color: aqua;
+    }
+    #screen.ready {
+        background-color: red;
+        color: white;
+    }
+    #screen.now {
+        background-color: greenyellow;
+    }
+</style>
+
+<body>
+    <div id="screen" class="waiting">클릭해서 시작하세요</div>
+    <div id="result"></div>    
+</body>
+<script>
+    const $screen = document.querySelector('#screen');
+    const $result = document.querySelector('#result');
+    let startTime;
+    let endTime;
+    let records = [];
+    $screen.addEventListener('click',()=>{
+        if($screen.classList.contains('waiting'))               // 파랑
+        {
+            $screen.classList.replace('waiting', 'ready');
+            $screen.textContent = '초록색이 되면 클릭하세요';
+            setTimeout(() => {
+                startTime = new Date();
+                $screen.classList.replace('ready', 'now');
+                $screen.textContent = '클릭하세요';
+            }, Math.floor(Math.random()*1000)+2000 );  //2000~3000
+        }
+        else if($screen.classList.contains('ready'))                // 빨강
+        {
+            $screen.textContent = '너무 성급했습니다.';
+        }
+        else   // now                                               // 초록색
+        {
+            $screen.classList.replace('now', 'waiting');
+            endTime = new Date();
+            records.push(endTime-startTime);
+            let avg = records.reduce( (a,b)=>a+b ) / records.length;
+            avg = avg.toFixed(2);
+            $result.textContent = `현재 : ${endTime-startTime}ms 평균:${avg}ms`;
+            $screen.textContent = '클릭해서 시작하세요';
+        }
+    });
+
+</script>
