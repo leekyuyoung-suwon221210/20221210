@@ -44,16 +44,21 @@
 
     $sci.addEventListener('click',()=>{
         humanNumber = 1;
-        // clearInterval(intervalId);        
+        clearInterval(intervalId);        
+        gameResult();
     });
     $stone.addEventListener('click',()=>{
         humanNumber = 2;
+        clearInterval(intervalId);
+        gameResult();
         // intervalId =  setInterval(() => {
         //     randomGame();
         // }, 100);
     });
     $paper.addEventListener('click',()=>{
         humanNumber = 3;
+        clearInterval(intervalId);
+        gameResult();
     }); 
     
     const gameResult = ()=>{
