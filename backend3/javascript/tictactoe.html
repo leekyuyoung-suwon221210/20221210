@@ -1,0 +1,43 @@
+<style>
+    table{
+        border-collapse: collapse;
+    }    
+    td{
+        border: 1px solid black;
+        width: 100px;
+        height: 100px;
+        font-size: 50px;
+        text-align: center;
+    }
+</style>
+<body>
+    <table>
+        <td id="t00"></td>
+        <td id="t01"></td>
+        <td id="t02"></td>
+        <tr></tr>
+        <td id="t10"></td>
+        <td id="t11"></td>
+        <td id="t12"></td>
+        <tr></tr>
+        <td id="t20"></td>
+        <td id="t21"></td>
+        <td id="t22"></td>
+    </table>
+</body>
+<script>
+    let mark = 'X';
+    const $table = document.querySelectorAll('td');
+    const callback = (event)=>{
+        if (event.target.textContent !== ''){
+            alert("빈칸이 아닙니다.");
+        }else{
+            mark =  mark === 'X'? 'O' : 'X';
+            event.target.textContent = mark;
+        }
+        
+    };
+    $table.forEach(td=>{
+        td.addEventListener('click',callback);
+    });
+</script>
