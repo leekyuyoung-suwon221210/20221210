@@ -29,40 +29,52 @@
     const temps = ['0','380px','170px'];
     const randomGame = function(){
         countnum++;
-        $computer.style.background = `url(${IMG_URL}) ${temps[countnum % 3]} 0`;         
-        $computer.style.backgroundSize = 'auto 200px'
+        compNumber = countnum % 3;
+        $computer.style.background = `url(${IMG_URL}) ${temps[compNumber]} 0`;         
+        $computer.style.backgroundSize = 'auto 200px'        
     };
     let countnum = 0;
     let intervalId;        
-    let compNumber = Math.floor( (Math.random()*3))+1;
+    //let compNumber = Math.floor( (Math.random()*3))+1;
     let humanNumber = -1;
-    console.log(compNumber);
+    
 
     intervalId =  setInterval(() => {
         randomGame();
-    }, 100);
+    }, 50);
+    
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button,idx)=>{          
+        console.log('idx : '+idx);
+        button.addEventListener('click', ()=>{
+            humanNumber = idx+1;
+            clearInterval(intervalId);        
+            gameResult();
+            console.log(compNumber+1);
+        });
+    })
 
-    $sci.addEventListener('click',()=>{
-        humanNumber = 1;
-        clearInterval(intervalId);        
-        gameResult();
-    });
-    $stone.addEventListener('click',()=>{
-        humanNumber = 2;
-        clearInterval(intervalId);
-        gameResult();
-        // intervalId =  setInterval(() => {
-        //     randomGame();
-        // }, 100);
-    });
-    $paper.addEventListener('click',()=>{
-        humanNumber = 3;
-        clearInterval(intervalId);
-        gameResult();
-    }); 
+    // $sci.addEventListener('click',()=>{
+    //     humanNumber = 1;
+    //     clearInterval(intervalId);        
+    //     gameResult();
+    //     console.log(compNumber+1);
+    // });
+    // $stone.addEventListener('click',()=>{
+    //     humanNumber = 2;
+    //     clearInterval(intervalId);
+    //     gameResult();
+    //     console.log(compNumber+1);        
+    // });
+    // $paper.addEventListener('click',()=>{
+    //     humanNumber = 3;
+    //     clearInterval(intervalId);
+    //     gameResult();
+    //     console.log(compNumber+1);
+    // }); 
     
     const gameResult = ()=>{
-        var result = humanNumber - compNumber + 1;
+        var result = humanNumber - (compNumber+1) + 1;
         if (result === 1){
             $result.textContent = '비겼습니다.'
         }
