@@ -53,6 +53,7 @@
     const colors = ['red','orange','yellow','green','white','pink'];
     let colorCopy = colors.concat(colors)    
     let shuffled = []
+    let cliced = []  // 클릭한 카드 배열 변수 선언
     // parseInt(Math.random()*12)
     // 카드 섞기
     function shuffle() { // 피셔-예이츠 셔플
@@ -77,11 +78,37 @@
         card.appendChild(cardInner);
         return card;
     }
-    function startGame(){
+    // 카드를 클릭하면 뒤집고 클릭한 카드를 배열에 추가
+    function onClickCard(){
+        this.classList.toggle('flipped');
+        cliced.push(this);
+        if(cliced.length !==2){
+            return;
+        }
+        const firstBackColor = cliced[0].querySelector('.card-back').style.backgroundColor;
+        const secondBackColor = cliced[1].querySelector('.card-back').style.backgroundColor;
+        // 두개의 카드색상이 같지 않으면 다시 뒤집는다
+        if(firstBackColor !== secondBackColor){
+            // 카드를 뒤집지만 틀렸을때 너무빨리 다시 뒤집에서 원래 뒤집은게 안보임
+            // 시차를 두고 뒤집음
+            setTimeout(()=>{
+                cliced.forEach(obj=>{
+                obj.classList.remove('flipped');
+                cliced = [];
+                });
+            },500);            
+        }else{
+            cliced = [];
+        }        
+                    
+    }
+
+    function startGame(){        
         shuffle(); // 섞기
         // 카드만들기
         for (let index = 0; index < total; index++) {
             const card = createCard(index);
+            card.addEventListener('click', onClickCard);
             $wrapper.appendChild(card);            
         }
         // 초반 카드 공개
