@@ -126,7 +126,11 @@
             setTimeout(() => {
                 if (completed.length === total){
                     alert("다 맞추셨습니다.");
-                    startGame();  // 게임 재 시작
+                    // 초기화
+                    cliced = []  // 클릭한 카드 배열 변수 선언
+                    completed = [] // 정답일때.
+                    clickable = false;                           
+                    cardinit();  // 게임 재 시작
                 }    
             }, 1000);
             
@@ -134,20 +138,15 @@
         }        
                     
     }
-
-    function startGame(){   
-        // 초기화
-        cliced = []  // 클릭한 카드 배열 변수 선언
-        completed = [] // 정답일때.
-        clickable = false;     
-
-        shuffle(); // 섞기
+    function makeCard(){
         // 카드만들기
         for (let index = 0; index < total; index++) {
             const card = createCard(index);
             card.addEventListener('click', onClickCard);
             $wrapper.appendChild(card);            
         }
+    }
+    function cardinit(){
         // 초반 카드 공개
         document.querySelectorAll('.card').forEach( (card, idx) =>{
             setTimeout(() => {
@@ -160,8 +159,15 @@
                 card.classList.remove('flipped')
             });
             clickable = true;
-        }, 5000);
-
+        }, 5000);        
+    }
+    function startGame(){              
+        // 섞기
+        shuffle(); 
+        // 카드만들기
+        makeCard();        
+        // 초기화
+        cardinit();
     }
     startGame();
 
