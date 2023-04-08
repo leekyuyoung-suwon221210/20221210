@@ -50,16 +50,17 @@
     const $wrapper = document.querySelector('#wrapper');
     const total = 12;  // 2장씩 6가지 색의 카드 생성
     const colors = ['red','orange','yellow','green','white','pink'];
-    let colorCopy = colors.concat(colors)
+    let colorCopy = colors.concat(colors)    
     let shuffled = []
     // parseInt(Math.random()*12)
     // 카드 섞기
-    function shuffle(){
-        for (let index = 0; index < 100; index++) {
+    function shuffle(){  // 피셔-에이츠 셔플
+        for (let index = 0; 0 < colorCopy.length; index++) {
             let randomIndex = parseInt(Math.random()*12);
-            let temp = colorCopy[0];
-            colorCopy[0] = colorCopy[randomIndex]
-            colorCopy[randomIndex] = temp
+            shuffled = shuffled.concat(colorCopy.splice(randomIndex,1))
+            // let temp = colorCopy[0];
+            // colorCopy[0] = colorCopy[randomIndex]
+            // colorCopy[randomIndex] = temp
         }
     }
     // 카드생성
@@ -72,7 +73,7 @@
         cardFront.className = 'card-front';
         const cardBack = document.createElement('div');
         cardBack.className = 'card-back';
-        cardBack.style.backgroundColor = colorCopy[i];
+        cardBack.style.backgroundColor = shuffled[i];
         cardInner.appendChild(cardFront);
         cardInner.appendChild(cardBack);
         card.appendChild(cardInner);
@@ -85,18 +86,18 @@
             const card = createCard(index);
             $wrapper.appendChild(card);            
         }
-        // 초반 카드 공개
-        document.querySelectorAll('.card').forEach( (card, idx) =>{
-            setTimeout(() => {
-               card.classList.add('flipped'); 
-            }, 1000 + 100*idx);
-        }  );
+        // // 초반 카드 공개
+        // document.querySelectorAll('.card').forEach( (card, idx) =>{
+        //     setTimeout(() => {
+        //        card.classList.add('flipped'); 
+        //     }, 1000 + 100*idx);
+        // }  );
 
-        setTimeout(() => {
-            document.querySelectorAll('.card').forEach( (card, idx) =>{
-            card.classList.remove('flipped')
-        }  );
-        }, 5000);
+        // setTimeout(() => {
+        //     document.querySelectorAll('.card').forEach( (card, idx) =>{
+        //     card.classList.remove('flipped')
+        // }  );
+        // }, 5000);
 
     }
     startGame();
