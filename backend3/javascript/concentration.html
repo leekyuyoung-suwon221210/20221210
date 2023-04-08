@@ -54,6 +54,7 @@
     let colorCopy = colors.concat(colors)    
     let shuffled = []
     let cliced = []  // 클릭한 카드 배열 변수 선언
+    let completed = 0 // 정답일때.
     // parseInt(Math.random()*12)
     // 카드 섞기
     function shuffle() { // 피셔-예이츠 셔플
@@ -98,6 +99,13 @@
                 });
             },500);            
         }else{
+            completed++;
+            setTimeout(() => {
+                if (completed === total/2){
+                    alert("다 맞추셨습니다.");
+                }    
+            }, 1000);
+            
             cliced = [];
         }        
                     
