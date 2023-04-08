@@ -14,6 +14,7 @@
             height: 100px;
             perspective: 140px;
         }
+
         .card-inner{
             position: relative;
             width: 100%;
@@ -21,7 +22,10 @@
             text-align: center;
             transition: transform 0.8s;
             transform-style: preserve-3d;
-        }
+        }        
+        /*<div class = 'card flipped' >
+            <div class='card-inner'></div>
+        </div> */
         .card.flipped .card-inner{
             transform: rotateY(180deg);
         }
@@ -38,12 +42,14 @@
     </style>
 </head>
 <body>
-    <div id="wrapper"></div>    
+    <div id="wrapper"></div>   
+    <div class="card flipped"></div> 
+    <div class="card-inner"></div> 
 </body>
 <script>
     const $wrapper = document.querySelector('#wrapper');
     const total = 12;  // 2장씩 6가지 색의 카드 생성
-    const colors = ['red','orange','yello','green','white','pink'];
+    const colors = ['red','orange','yellow','green','white','pink'];
     let colorCopy = colors.concat(colors)
     let shuffled = []
     // parseInt(Math.random()*12)
@@ -73,12 +79,25 @@
         return card;
     }
     function startGame(){
-        shuffle();
+        shuffle(); // 섞기
+        // 카드만들기
         for (let index = 0; index < total; index++) {
             const card = createCard(index);
-            $wrapper.appendChild(card);
-            
+            $wrapper.appendChild(card);            
         }
+        // 초반 카드 공개
+        document.querySelectorAll('.card').forEach( (card, idx) =>{
+            setTimeout(() => {
+               card.classList.add('flipped'); 
+            }, 1000 + 100*idx);
+        }  );
+
+        setTimeout(() => {
+            document.querySelectorAll('.card').forEach( (card, idx) =>{
+            card.classList.remove('flipped')
+        }  );
+        }, 5000);
+
     }
     startGame();
 
