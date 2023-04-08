@@ -51,10 +51,24 @@
     const $wrapper = document.querySelector('#wrapper');
     const total = 12;  // 2장씩 6가지 색의 카드 생성
     const colors = ['red','orange','yellow','green','white','pink'];
+    // const colors = ['red','orange','yellow'];
     let colorCopy = colors.concat(colors)    
     let shuffled = []
     let cliced = []  // 클릭한 카드 배열 변수 선언
-    let completed = 0 // 정답일때.
+    let completed = [] // 정답일때.
+    let clickable = false;
+    // 색상을 랜덤하게 생성하는 함수(사용 예정)
+    // function randomRGBGeneration(){
+    //     const r = Math.floor(Math.random()*255);
+    //     const g = Math.floor(Math.random()*255);
+    //     const b = Math.floor(Math.random()*255);
+    //     return [r,g,b];
+    // }
+    // for (let index = 0; index < total; index++) {
+    //     colors.push(randomRGBGeneration());
+        
+    // }
+
     // parseInt(Math.random()*12)
     // 카드 섞기
     function shuffle() { // 피셔-예이츠 셔플
@@ -81,6 +95,14 @@
     }
     // 카드를 클릭하면 뒤집고 클릭한 카드를 배열에 추가
     function onClickCard(){
+        // tihs --> 현재 클릭한 객체
+        // 초반에 카드를 보여주고 다시 숨길때가지 클릭 이벤트 방지 : clickable
+        // 같은 카드를 연속으로 열수 없게 cliced[0] === this
+        // 이미 맞춘카드는 다시 뒤집을 수 없다 completed.includes(this)
+        if(!clickable || cliced[0] === this || completed.includes(this)){
+            return;
+        }
+
         this.classList.toggle('flipped');
         cliced.push(this);
         if(cliced.length !==2){
@@ -99,10 +121,12 @@
                 });
             },500);            
         }else{
-            completed++;
+            completed.push(cliced[0]);
+            completed.push(cliced[1]);
             setTimeout(() => {
-                if (completed === total/2){
+                if (completed.length === total){
                     alert("다 맞추셨습니다.");
+                    startGame();  // 게임 재 시작
                 }    
             }, 1000);
             
@@ -111,7 +135,12 @@
                     
     }
 
-    function startGame(){        
+    function startGame(){   
+        // 초기화
+        cliced = []  // 클릭한 카드 배열 변수 선언
+        completed = [] // 정답일때.
+        clickable = false;     
+
         shuffle(); // 섞기
         // 카드만들기
         for (let index = 0; index < total; index++) {
@@ -125,11 +154,12 @@
                card.classList.add('flipped'); 
             }, 1000 + 100*idx);
         }  );
-
+        // 카드 숨김
         setTimeout(() => {
-            document.querySelectorAll('.card').forEach( (card, idx) =>{
-            card.classList.remove('flipped')
-        }  );
+                document.querySelectorAll('.card').forEach( (card, idx) =>{
+                card.classList.remove('flipped')
+            });
+            clickable = true;
         }, 5000);
 
     }
