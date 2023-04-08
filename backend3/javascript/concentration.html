@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카드맞추기</title>
     <style>
-        .card{
+        .card {
             display: inline-block;
             margin-right: 20px;
             margin-bottom: 20px;
@@ -15,36 +15,37 @@
             perspective: 140px;
         }
 
-        .card-inner{
+        .card-inner {
             position: relative;
             width: 100%;
             height: 100%;
             text-align: center;
             transition: transform 0.8s;
             transform-style: preserve-3d;
-        }        
-        /*<div class = 'card flipped' >
-            <div class='card-inner'></div>
-        </div> */
-        .card.flipped .card-inner{
+        }
+
+        .card.flipped .card-inner {
             transform: rotateY(180deg);
         }
-        .card-front{
+
+        .card-front {
             background: navy;
         }
-        .card-front, .card-back{
+
+        .card-front, .card-back {
             position: absolute;
-            width: 100%;     
+            width: 100%;
             height: 100%;
-            border : 1px solid black;
+            border: 1px solid black;
             backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
         }
     </style>
 </head>
 <body>
-    <div id="wrapper"></div>   
-    <div class="card flipped"></div> 
-    <div class="card-inner"></div> 
+    <div id="wrapper"></div>       
 </body>
 <script>
     const $wrapper = document.querySelector('#wrapper');
@@ -54,25 +55,22 @@
     let shuffled = []
     // parseInt(Math.random()*12)
     // 카드 섞기
-    function shuffle(){  // 피셔-에이츠 셔플
-        for (let index = 0; 0 < colorCopy.length; index++) {
-            let randomIndex = parseInt(Math.random()*12);
-            shuffled = shuffled.concat(colorCopy.splice(randomIndex,1))
-            // let temp = colorCopy[0];
-            // colorCopy[0] = colorCopy[randomIndex]
-            // colorCopy[randomIndex] = temp
+    function shuffle() { // 피셔-예이츠 셔플
+        for (let i = 0; colorCopy.length > 0; i += 1) {
+            const randomIndex = Math.floor(Math.random() * colorCopy.length);
+            shuffled = shuffled.concat(colorCopy.splice(randomIndex, 1));
         }
     }
     // 카드생성
     function createCard(i){
         const card = document.createElement('div');
-        card.className='card';
+        card.className = 'card'; // .card 태그 생성
         const cardInner = document.createElement('div');
-        cardInner.className = 'card-inner';
+        cardInner.className = 'card-inner'; // .card-inner 태그 생성
         const cardFront = document.createElement('div');
-        cardFront.className = 'card-front';
+        cardFront.className = 'card-front'; // .card-front 태그 생성
         const cardBack = document.createElement('div');
-        cardBack.className = 'card-back';
+        cardBack.className = 'card-back'; // .card-back 태그 생성
         cardBack.style.backgroundColor = shuffled[i];
         cardInner.appendChild(cardFront);
         cardInner.appendChild(cardBack);
@@ -86,18 +84,18 @@
             const card = createCard(index);
             $wrapper.appendChild(card);            
         }
-        // // 초반 카드 공개
-        // document.querySelectorAll('.card').forEach( (card, idx) =>{
-        //     setTimeout(() => {
-        //        card.classList.add('flipped'); 
-        //     }, 1000 + 100*idx);
-        // }  );
+        // 초반 카드 공개
+        document.querySelectorAll('.card').forEach( (card, idx) =>{
+            setTimeout(() => {
+               card.classList.add('flipped'); 
+            }, 1000 + 100*idx);
+        }  );
 
-        // setTimeout(() => {
-        //     document.querySelectorAll('.card').forEach( (card, idx) =>{
-        //     card.classList.remove('flipped')
-        // }  );
-        // }, 5000);
+        setTimeout(() => {
+            document.querySelectorAll('.card').forEach( (card, idx) =>{
+            card.classList.remove('flipped')
+        }  );
+        }, 5000);
 
     }
     startGame();
