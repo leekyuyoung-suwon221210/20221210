@@ -116,6 +116,78 @@
         }
         return data;
     }
+    function onRightClick(event) {
+        event.preventDefault();
+        const target = event.target;
+        const rowIndex = target.parentNode.rowIndex;
+        const cellIndex = target.cellIndex;
+        const cellData = data[rowIndex][cellIndex];
+        if(cellData === CODE.MINE){ // 지뢰
+            data[rowIndex][cellIndex] = CODE.QUESTION_MINE; // 물음표 지뢰
+            target.className = 'question';
+            target.textContent = '?';
+        }else if(cellData === CODE.QUESTION_MINE){
+            data[rowIndex][cellIndex] = CODE.FLAG_MINE;
+            target.className = 'flag';
+            target.textContent = '!';
+        }else if(cellData === CODE.FLAG_MINE){
+            data[rowIndex][cellIndex] = CODE.MINE
+            target.className = '';
+            target.textContent = '';
+        }else if(cellData === CODE.NORMAL){
+            data[rowIndex][cellIndex] = CODE.QUESTION;
+            target.className = 'question';
+            target.textContent = '?';
+        }else if(cellData === CODE.QUESTION){
+            data[rowIndex][cellIndex] = CODE.FLAG;
+            target.className = 'flag';
+            target.textContent = '!';
+        }else if(cellData === CODE.FLAG){
+            data[rowIndex][cellIndex] = CODE.NORMAL;
+            target.className = '';
+            target.textContent = '';
+        }
+
+        // text
+        countMine(rowIndex,cellIndex);
+
+    }
+    // 특정칸을 기준으로 주변 지뢰 개수를 구하는 코드
+    function countMine(rowIndex, cellIndex) {
+        const mines = [CODE.MINE, CODE.QUESTION_MINE, CODE.FLAG_MINE];
+        let i = 0;
+        mines.includes(data[rowIndex - 1]?.[cellIndex - 1]) && i++;  // 옵셔널 체이닝 기법
+        mines.includes(data[rowIndex - 1]?.[cellIndex]) && i++;  // 옵셔널 체이닝 기법
+        mines.includes(data[rowIndex - 1]?.[cellIndex + 1]) && i++;  // 옵셔널 체이닝 기법
+        mines.includes(data[rowIndex][cellIndex - 1]) && i++;
+        mines.includes(data[rowIndex][cellIndex + 1]) && i++;
+        mines.includes(data[rowIndex + 1]?.[cellIndex - 1]) && i++;  // 옵셔널 체이닝 기법
+        mines.includes(data[rowIndex + 1]?.[cellIndex]) && i++;  // 옵셔널 체이닝 기법
+        mines.includes(data[rowIndex + 1]?.[cellIndex + 1]) && i++;  // 옵셔널 체이닝 기법
+        return i;
+    }
+
+    // 주의사항....
+    function onLeftClick(event) {
+        const target = event.target;  // td?
+        const rowIndex = target.parentNode.rowIndex;
+        const cellIndex = target.cellIndex;
+        const cellData = data[rowIndex][cellIndex];
+        if(cellData === CODE.NORMAL){ // 닫힌 칸이면
+            target.className = 'opened';
+            // 게임규칙을 보고 추가로 구현.....
+
+        }else if(cellData === CODE.MINE){ // 지뢰칸이면
+            target.textContent = '펑!!!';
+            target.className = 'opened';
+            clearInterval(interval);
+            $tbody.removeEventListener('contextmenu',onRightClick);
+            $tbody.removeEventListener('click',onLeftClick);
+        } // 나머지 동작은 아무것도 안해도 됨
+    }
+
+
+
     // 화면에 표시
     function drawTable() {
         data = plantMine();
@@ -129,9 +201,11 @@
                 $tr.append($td);                
             });
             $tbody.append($tr);
+            $tbody.addEventListener('contextmenu', onRightClick);
+            $tbody.addEventListener('click', onLeftClick);
         });
     }
 
-    
+
 </script>
 </html>
