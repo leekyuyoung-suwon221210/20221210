@@ -39,11 +39,20 @@
     td.question{background: orange;}
 </style>
 <body>
+    <form id ='form'>
+        <input placeholder="가로 줄" id="row" size="5">
+        <input placeholder="세로 줄" id="cell" size="5">
+        <input placeholder="지뢰" id="mine" size="5">
+        <button>생성</button>
+    </form>
+
     <table id = 'table'>
         <tbody></tbody>
     </table>
     <div id="result"></div>
+    
 </body>
+
 <script>
     const $tbody = document.querySelector('#table tbody');
     const $result = document.querySelector('#result')
@@ -104,5 +113,10 @@
     }
     drawTable();
     
+    const $form = document.querySelector('#form');
+    $form.addEventListener('submit', (event)=>{
+        event.preventDefault(); // 기본 동작을 막음
+    });
+
 </script>
 </html>
