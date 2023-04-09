@@ -45,20 +45,21 @@
         <input placeholder="지뢰" id="mine" size="5">
         <button>생성</button>
     </form>
-
+    <div id="timer">0초</div>
     <table id = 'table'>
         <tbody></tbody>
     </table>
-    <div id="result"></div>
-    
+    <div id="result"></div>   
 </body>
 
 <script>
+    const $form = document.querySelector('#form');
+    const $timer = document.querySelector('#timer');
     const $tbody = document.querySelector('#table tbody');
     const $result = document.querySelector('#result')
-    const row = 10;
-    const cell = 10;
-    const mine = 10;
+    let row;
+    let cell;
+    let mine;
     const CODE = {
         NORMAL:-1,
         QUESTION:-2,
@@ -69,6 +70,25 @@
         OPENED : 0  // 0이상이면 모두 열린 칸
     }
     let data;
+    let openCount = 0;
+    let startTime;
+    let interval;
+    function onSubmit(event) {  // 콜백함수( 이벤트에 등록해서 해당 이벤트가 발생하면 실행되는 함수)
+        event.preventDefault(); // submit 이벤트는 기본적으로 데이터를 가지고 서버호출하는 기능
+        row = parserInt(event.target.row.value); // input text의 id가 row인 데이터
+        cell = parserInt(event.target.cell.value);
+        mine = parserInt(event.target.mine.value);
+        openCount = 0;
+        clearInterval(interval);
+        $tbody.innerHTML = '';
+        drawTable();
+        startTime = new Date();
+        interval = setInterval(()=>{
+            const time = Math.floor( (new Date() - startTime) / 1000);
+            $timer.textContent = `${time}초`;
+        },1000);
+    }
+    $form.addEventListener('submit', onsubmit);
     // 지뢰 데이터 생성
     function plantMine() {
         const candidate = Array(row*cell).fill().map((arr,i)=>{
@@ -113,10 +133,8 @@
     }
     drawTable();
     
-    const $form = document.querySelector('#form');
-    $form.addEventListener('submit', (event)=>{
-        event.preventDefault(); // 기본 동작을 막음
-    });
+    
+  
 
 </script>
 </html>
