@@ -1,4 +1,4 @@
-백그라운드:
+<!-- 백그라운드:
     타이머를 처리하고 이벤트 리스너를 저장하는 공간
     setTimeout 함수가 실행되면
         백그라운드에서 시간을 재고 시간이되면 setTimeout의 콜백함수를 태스트 큐에 보냄
@@ -21,7 +21,7 @@ anonymous 함수
     소스코드에서 함수가 호출되는 첫번째 순간
         startGame()
     자바스크립트 엔진은 자바스크립트 소스 코드가 처음 실행되는 순간에도 하나의 함수가 실행
-    크롬브라우져는 이를 anonymous라는 함수로 표시
+    크롬브라우져는 이를 anonymous라는 함수로 표시 -->
 
 
 <!DOCTYPE html>
@@ -74,9 +74,9 @@ anonymous 함수
     <div id="wrapper"></div>       
 </body>
 <script>
-    const $wrapper = document.querySelector('#wrapper');
-    const total = 12;  // 2장씩 6가지 색의 카드 생성
+    const $wrapper = document.querySelector('#wrapper');    
     const colors = ['red','orange','yellow','green','white','pink'];
+    const total = colors.length*2;  // 2장씩 6가지 색의 카드 생성
     // const colors = ['red','orange','yellow'];
     let colorCopy = colors.concat(colors)    
     let shuffled = []
@@ -153,10 +153,17 @@ anonymous 함수
                 if (completed.length === total){
                     alert("다 맞추셨습니다.");
                     // 초기화
-                    cliced = []  // 클릭한 카드 배열 변수 선언
-                    completed = [] // 정답일때.
-                    clickable = false;                           
-                    cardinit();  // 게임 재 시작
+                    colorCopy = colors.concat(colors);    
+                    shuffled = [];
+                    cliced = [];  // 클릭한 카드 배열 변수 선언
+                    completed = []; // 정답일때.
+                    clickable = false;  
+                    
+                    // 기존 노드에 추가되어 있던 카드 div를 제거
+                    while ($wrapper.firstChild) {
+                        $wrapper.removeChild($wrapper.firstChild);
+                    }
+                    startGame();  // 게임 재 시작
                 }    
             }, 1000);
             
