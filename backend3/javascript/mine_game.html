@@ -1,3 +1,21 @@
+<!-- 마우스 우클릭 : 물음표 - 깃발 - 일반칸
+닫힌칸 : 지뢰가 있으면서 닫힌 칸, 없으면서 닫힌 칸
+물음표/깃발 칸 : 지뢰가 있는 칸과 없는 칸으로 분리
+상태코드
+
+종류            코드숫자        코드이름
+열린칸          0 ~ 8           OPENED
+닫힌칸(지뢰X)   -1              NORMAL 
+물음표칸(지뢰X)   -2            QUESTION
+깃발칸(지뢰X)   -3              FLAG
+물음표칸(지뢰O)   -4            QUESTION_MINE
+깃발칸(지뢰O)   -5              FLAG_MINE
+닫힌칸(지뢰O)   -6              MINE 
+
+-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,5 +47,62 @@
 <script>
     const $tbody = document.querySelector('#table tbody');
     const $result = document.querySelector('#result')
+    const row = 10;
+    const cell = 10;
+    const mine = 10;
+    const CODE = {
+        NORMAL:-1,
+        QUESTION:-2,
+        FLAG : -3,
+        QUESTION_MINE : -4,
+        FLAG_MINE : -5,
+        MINE : -6,
+        OPENED : 0  // 0이상이면 모두 열린 칸
+    }
+    let data;
+    // 지뢰 데이터 생성
+    function plantMine() {
+        const candidate = Array(row*cell).fill().map((arr,i)=>{
+            return i;
+        })
+        const shuffle = []
+        while (candidate.length > row*cell-mine) {
+            const chosen = candidate.splice(Math.floor(Math.random()*candidate.length),1)[0];
+            shuffle.push(chosen);
+        }
+        const data = [];
+        // 객체지향은 모양을 만들어 놓고... 데이터를 나중에 채운다... 
+        for (let i = 0; i < row; i++) {
+            const rowData = []
+            data.push(rowData);
+            for (let j = 0; j < cell; j++) {
+                rowData.push(CODE.NORMAL)                
+            }            
+        }
+        for (let k = 0; k < shuffle.length; k++) {
+            const ver =  Math.floor(shuffle[k] / cell);
+            const hor = shuffle[k] % cell;
+            data[ver][hor] = CODE.MINE;
+            
+        }
+        return data;
+    }
+    // 화면에 표시
+    function drawTable() {
+        data = plantMine();
+        data.forEach((row)=>{
+            const $tr = document.createElement('tr');
+            row.forEach((cell) =>{
+                const $td = document.createElement('td');
+                if(cell === CODE.MINE){
+                    $td.textContent = 'X';
+                }
+                $tr.append($td);                
+            });
+            $tbody.append($tr);
+        });
+    }
+    drawTable();
+    
 </script>
 </html>
