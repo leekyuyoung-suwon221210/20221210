@@ -43,7 +43,7 @@
         <input placeholder="가로 줄" id="row" size="5">
         <input placeholder="세로 줄" id="cell" size="5">
         <input placeholder="지뢰" id="mine" size="5">
-        <button>생성</button>
+        <input type="submit" value="생성">
     </form>
     <div id="timer">0초</div>
     <table id = 'table'>
@@ -75,9 +75,9 @@
     let interval;
     function onSubmit(event) {  // 콜백함수( 이벤트에 등록해서 해당 이벤트가 발생하면 실행되는 함수)
         event.preventDefault(); // submit 이벤트는 기본적으로 데이터를 가지고 서버호출하는 기능
-        row = parserInt(event.target.row.value); // input text의 id가 row인 데이터
-        cell = parserInt(event.target.cell.value);
-        mine = parserInt(event.target.mine.value);
+        row = parseInt(event.target.row.value); // input text의 id가 row인 데이터
+        cell = parseInt(event.target.cell.value);
+        mine = parseInt(event.target.mine.value);
         openCount = 0;
         clearInterval(interval);
         $tbody.innerHTML = '';
@@ -88,7 +88,7 @@
             $timer.textContent = `${time}초`;
         },1000);
     }
-    $form.addEventListener('submit', onsubmit);
+    $form.addEventListener('submit', onSubmit);
     // 지뢰 데이터 생성
     function plantMine() {
         const candidate = Array(row*cell).fill().map((arr,i)=>{
@@ -131,10 +131,7 @@
             $tbody.append($tr);
         });
     }
-    drawTable();
-    
-    
-  
 
+    
 </script>
 </html>
