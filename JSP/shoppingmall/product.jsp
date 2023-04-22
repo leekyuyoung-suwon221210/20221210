@@ -29,12 +29,12 @@
 	<div class="container">
 		<div class="row" align='center'>
 			<div class="col-md-6">
-				<p>상품명
-				<p>설명
-				<p>상품코드
-				<p>제조사
-				<p>분류
-				<p>재고 수
+				<p>상품명 :<%=p.getPname() %>
+				<p>설명 :<%=p.getDescription() %>
+				<p>상품코드 :<%=p.getProductId() %>
+				<p>제조사 :<%=p.getManufacturer() %>
+				<p>분류 :<%=p.getCategory() %>
+				<p>재고 수 :<%=p.getUnitInStock() %>
 			</div>
 		</div>	
 	</div>

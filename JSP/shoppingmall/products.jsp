@@ -34,7 +34,7 @@
 				<h3><%=p.getPname() %></h3>
 				<p><%=p.getDescription() %></p>
 				<p><%=p.getUnitPrice()%>원</p>
-				<p><a href="./product.jsp?id=<%=p.getProductId()%>>" 
+				<p><a href="./product.jsp?id=<%=p.getProductId()%>" 
 				class="btn btn-secondary" role="button">상세정보 &raquo;</a>
 			</div>			
 			<%

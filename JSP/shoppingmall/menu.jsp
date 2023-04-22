@@ -8,8 +8,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="./products.jsp">상품정보</a>
-        <a class="nav-link" href="#">other2</a>
+        <a id="productlist" class="nav-link active" aria-current="page" href="./products.jsp">상품목록</a>
+        <a id='productregister' class="nav-link" href="./addProduct.jsp">상품등록</a>
         <a class="nav-link" href="#">other3</a>
         <a class="nav-link disabled">other4</a>
       </div>
