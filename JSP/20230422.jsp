@@ -7,7 +7,7 @@
 <title>폼태그</title>
 </head>
 <body>
-	<form action="#" method="get">
+	<form action="process_20230422.jsp" method="post">
 		<p>아이디 : <input type="text" name="id">
 		<p>비밀번호 : <input type="password" name="passwd">
 		<p>이름 : <input type="text" name="name">
@@ -16,9 +16,9 @@
 		- <input type="text" maxlength="4" name="phone3">
 		<p>성별 : <input type="radio" name="gender" value="남성" checked="checked">남성
 		<input type="radio" name="gender" value="여성">여성
-		<p>취미 : 독서<input type="checkbox" name="hobby1" checked="checked"> 
-		운동<input type="checkbox" name="hobby2">
-		영화<input type="checkbox" name="hobby3">
+		<p>취미 : 독서<input type="checkbox" name="hobby" value="reading" checked="checked"> 
+		운동<input type="checkbox" value="helth" name="hobby">
+		영화<input type="checkbox" value="movie" name="hobby">
 		<p>도시 
 		<select name="city" size=3>  <!-- 최초 보여줄 row의 수 -->
 			<option value="seoul">서울특별시</option>	
