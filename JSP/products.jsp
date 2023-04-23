@@ -19,7 +19,7 @@
 	List<Product> listofProducts = productDAO.getAllProducts();			
 %>
 <body>
-	<jsp:include page="menu.jsp"></jsp:include>
+	<jsp:include page="./menu.jsp"></jsp:include>
 	<div class="container">
 		<h1 class="display-3">상품 목록</h1>
 	</div>
@@ -31,9 +31,12 @@
 				Product p =  listofProducts.get(i);			
 			%>
 			<div class="col-md-4">
+				<img alt="" src="c:/upload/<%=p.getFilename() %>" style='width:100%'>
 				<h3><%=p.getPname() %></h3>
 				<p><%=p.getDescription() %></p>
-				<p><%=p.getUnitPrice() %></p>
+				<p><%=p.getUnitPrice()%>원</p>
+				<p><a href="./product.jsp?id=<%=p.getProductId()%>" 
+				class="btn btn-secondary" role="button">상세정보 &raquo;</a>
 			</div>			
 			<%
 			}
@@ -41,6 +44,6 @@
 		</div>
 	</div>	
 	
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="./footer.jsp"></jsp:include>
 </body>
 </html>
